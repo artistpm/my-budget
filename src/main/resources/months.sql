@@ -1,0 +1,4 @@
+insert into
+resources () values(
+
+);

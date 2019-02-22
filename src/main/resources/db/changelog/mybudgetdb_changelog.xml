@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="mybudget-init-01" author="nemethi" context="dev">
+        <createTable tableName="cost_parameter_encoding">
+            <column name="pen_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="created" type="date" defaultValueDate="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--<changeSet id="mybudget-init-02" author="nemethi" context="test">-->
+        <!--<createView viewName="user_view" replaceIfExists="true">-->
+            <!--select username from User where id = 1-->
+        <!--</createView>-->
+        <!--<rollback changeSetId="mybudget-init-03" changeSetAuthor="nemethi" >-->
+            <!--drop view if exists user_view cascade;-->
+        <!--</rollback>-->
+    <!--</changeSet>-->
+
+</databaseChangeLog>

@@ -21,7 +21,7 @@ public class Income {
     private Integer id;
 
     @ManyToOne
-    private User userId;
+    private User user;
 
     @NotBlank
     @Size(max = 100)

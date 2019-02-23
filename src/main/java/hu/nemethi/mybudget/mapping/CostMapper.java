@@ -20,7 +20,6 @@ public interface CostMapper {
             @Mapping(source = "id", target = "costId"),
             @Mapping(source = "user.id", target = "userId")
     })
-
     CostDto mapEntityToDto(Cost cost);
 
 }

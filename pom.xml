@@ -251,28 +251,28 @@
             </plugin>
 
             <!-- LIQUIBASE-->
-            <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.6.2</version>
-                <configuration>
-                    <driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://localhost:5432/mybudgetdb</url>
-                    <username>mybudget</username>
-                    <password>batukan2</password>
+            <!--<plugin>-->
+            <!--<groupId>org.liquibase</groupId>-->
+            <!--<artifactId>liquibase-maven-plugin</artifactId>-->
+            <!--<version>3.6.2</version>-->
+            <!--<configuration>-->
+            <!--<driver>org.postgresql.Driver</driver>-->
+            <!--<url>jdbc:postgresql://localhost:5432/mybudgetdb</url>-->
+            <!--<username>mybudget</username>-->
+            <!--<password>batukan2</password>-->
 
-                    <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
+            <!--<propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>-->
 
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>update</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--</configuration>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>process-resources</phase>-->
+            <!--<goals>-->
+            <!--<goal>update</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
 
         <resources>

@@ -3,25 +3,20 @@ package hu.nemethi.mybudget.repository;
 import hu.nemethi.mybudget.TestParent;
 import hu.nemethi.mybudget.entity.User;
 import hu.nemethi.mybudget.enums.Authority;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.FixMethodOrder;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runners.MethodSorters;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,7 +39,7 @@ public class UserRepositoryTest extends TestParent {
     private UUID uuid;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         superUser = super.getUser();
     }
 
@@ -55,11 +50,11 @@ public class UserRepositoryTest extends TestParent {
     }
 
     @Test
-    public void modify(){
+    public void modify() {
         User localUser = this.getNewUser();
         User savedUser = userRepository.save(localUser);
 
-        LocalDate created = LocalDate.now();
+        LocalDateTime created = LocalDateTime.now();
         savedUser.setCreated(created);
         savedUser.setAuthority(Authority.USER);
         savedUser.setUsername("inemeth83@yahoo.com");
@@ -73,7 +68,7 @@ public class UserRepositoryTest extends TestParent {
     }
 
     @Test
-    public void deleteByUserId(){
+    public void deleteByUserId() {
         User localUser = this.getNewUser();
         User response = userRepository.save(localUser);
         userRepository.deleteById(response.getId());
@@ -82,12 +77,12 @@ public class UserRepositoryTest extends TestParent {
         assertEquals(deletedUser.isPresent(), false, "user id should be null!");
     }
 
-    private User getNewUser(){
+    private User getNewUser() {
         uuid = UUID.randomUUID();
 
         return User.builder()
                 .authority(Authority.ADMIN)
-                .created(LocalDate.now())
+                .created(LocalDateTime.now())
                 .id(uuid)
                 .pwrd("batukan3")
                 .username("artistpm@gmail.com")

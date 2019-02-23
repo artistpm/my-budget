@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,7 +31,7 @@ public class UserServiceImplIT {
     @Autowired
     private UserServiceImpl userService;
 
-    private static final LocalDate now = java.time.LocalDate.now();
+    private static final LocalDateTime now = LocalDateTime.now();
 
     @BeforeEach
     public void init() {

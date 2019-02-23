@@ -7,7 +7,6 @@ import hu.nemethi.mybudget.entity.Language;
 import hu.nemethi.mybudget.entity.Resources;
 import hu.nemethi.mybudget.entity.User;
 import hu.nemethi.mybudget.enums.Authority;
-import hu.nemethi.mybudget.exceptions.MissingEntityException;
 import hu.nemethi.mybudget.mapping.UserMapper;
 import hu.nemethi.mybudget.repository.UserRepository;
 import org.junit.FixMethodOrder;
@@ -24,7 +23,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.Month;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -69,7 +68,7 @@ public class CostServiceImplIT {
         user =
                 User.builder()
                     .authority(Authority.ADMIN)
-                    .created(LocalDate.now())
+                    .created(LocalDateTime.now())
                     .id(userId)
                     .pwrd("batukan2")
                     .username("batukan")
@@ -87,8 +86,7 @@ public class CostServiceImplIT {
                 .otherIdentifier("L1465993")
                 .payed(false)
                 .paymentDeadline(LocalDate.now())
-                .userId(managedUser.getUserId())
-                .paymentMonth(Month.FEBRUARY).build();
+                .userId(managedUser.getUserId()).build();
 
         costDtoCostService.create(costDto);
     }
@@ -106,8 +104,7 @@ public class CostServiceImplIT {
                 .otherIdentifier("L1465993")
                 .payed(false)
                 .paymentDeadline(LocalDate.now())
-                .userId(managedUser.getUserId())
-                .paymentMonth(Month.FEBRUARY).build();
+                .userId(managedUser.getUserId()).build();
 
         CostDto response = costDtoCostService.create(costDto);
 
@@ -129,8 +126,7 @@ public class CostServiceImplIT {
                 .otherIdentifier("L1465993")
                 .payed(false)
                 .paymentDeadline(LocalDate.now())
-                .userId(managedUser.getUserId())
-                .paymentMonth(Month.FEBRUARY).build();
+                .userId(managedUser.getUserId()).build();
 
         costDtoCostService.create(costDto);
 
@@ -181,8 +177,7 @@ public class CostServiceImplIT {
                 .otherIdentifier("L1465993")
                 .payed(false)
                 .paymentDeadline(LocalDate.now())
-                .userId(managedUser.getUserId())
-                .paymentMonth(Month.FEBRUARY).build();
+                .userId(managedUser.getUserId()).build();
 
         costDtoCostService.create(fistCost);
 
@@ -196,8 +191,7 @@ public class CostServiceImplIT {
                 .otherIdentifier("L1465996")
                 .payed(false)
                 .paymentDeadline(LocalDate.now())
-                .userId(managedUser.getUserId())
-                .paymentMonth(Month.FEBRUARY).build();
+                .userId(managedUser.getUserId()).build();
 
         costDtoCostService.create(firstCost);
     }

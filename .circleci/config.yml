@@ -6,6 +6,10 @@ jobs: # a collection of steps
 
     docker: # run the steps with Docker
       - image: circleci/openjdk:8-jdk-browsers # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/postgres
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: posetgres
 
     steps: # a collection of executable commands
 

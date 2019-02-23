@@ -1,0 +1,20 @@
+version: 2
+jobs:
+        build:
+                working_directory: ~/my-budget-working-dir
+        docker:
+                - image: circleci/openjdk:8-jdk-browsers
+        steps:
+                - checkout
+                - run: mvn dependency:go-offline
+                - save_cache: 
+                  paths:
+                          - ~/.m2
+                  key: my-budget-app-{{ checksum "pom.xml"}}
+                - run: mvn package
+
+                - store_test_results:
+                  path: target/surefire-reports
+
+                - store_artifacts:
+                  path: target/my-budget-1.0.0-SNPASHOT.jar

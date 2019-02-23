@@ -20,7 +20,7 @@ public class PlanDto {
     private Integer planId;
 
     @NotNull
-    private UUID user;
+    private UUID userId;
 
     @NotBlank
     @Size(max = 100)

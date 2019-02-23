@@ -38,6 +38,6 @@ public class UserDto {
     @Present
     private LocalDateTime loginDate;
 
-    private LocalDate created;
+    private LocalDateTime created;
 
 }

@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -18,6 +17,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
+@EqualsAndHashCode(of = {"costName", "costValue"})
 public class CostDto {
 
     @NotNull

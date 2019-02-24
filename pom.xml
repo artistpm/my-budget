@@ -15,6 +15,8 @@
     <artifactId>mybudget</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
+    <packaging>jar</packaging>
+
     <properties>
         <spring-data-version>2.1.3.RELEASE</spring-data-version>
 
@@ -76,7 +78,6 @@
         </dependency>
 
 
-
         <!-- DATABASE MANAGEMENT-->
 
         <dependency>
@@ -96,8 +97,6 @@
             <artifactId>javax.persistence-api</artifactId>
             <version>2.2</version>
         </dependency>
-
-
 
 
         <!-- UNIT TESTING -->
@@ -125,7 +124,6 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>5.2.9.Final</version>
         </dependency>
-
 
 
         <!-- Utilities -->
@@ -160,6 +158,19 @@
             <version>6.0.15.Final</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.12.0</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -170,6 +181,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
+
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                </configuration>
             </plugin>
 
 
@@ -249,30 +266,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- LIQUIBASE-->
-            <!--<plugin>-->
-            <!--<groupId>org.liquibase</groupId>-->
-            <!--<artifactId>liquibase-maven-plugin</artifactId>-->
-            <!--<version>3.6.2</version>-->
-            <!--<configuration>-->
-            <!--<driver>org.postgresql.Driver</driver>-->
-            <!--<url>jdbc:postgresql://localhost:5432/mybudgetdb</url>-->
-            <!--<username>mybudget</username>-->
-            <!--<password>batukan2</password>-->
-
-            <!--<propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>-->
-
-            <!--</configuration>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<phase>process-resources</phase>-->
-            <!--<goals>-->
-            <!--<goal>update</goal>-->
-            <!--</goals>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--</plugin>-->
         </plugins>
 
         <resources>

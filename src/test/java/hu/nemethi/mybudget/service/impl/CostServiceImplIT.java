@@ -9,11 +9,10 @@ import hu.nemethi.mybudget.entity.User;
 import hu.nemethi.mybudget.enums.Authority;
 import hu.nemethi.mybudget.mapping.UserMapper;
 import hu.nemethi.mybudget.repository.UserRepository;
-import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(SpringExtension.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @SpringBootTest()
 @ActiveProfiles("test")
 public class CostServiceImplIT {
@@ -42,7 +40,7 @@ public class CostServiceImplIT {
     private static final UUID userId = UUID.randomUUID();
 
     @Autowired
-    private CostServiceImpl costDtoCostService;
+    private CostServiceImpl costService;
 
     @Autowired
     private UserServiceImpl userService;
@@ -55,6 +53,7 @@ public class CostServiceImplIT {
 
     private Currency currency;
     private Resources resources;
+    private Resources monthlyPeriod;
     private Language language;
     private User user;
     private UserDto managedUser;
@@ -64,6 +63,8 @@ public class CostServiceImplIT {
         currency = Currency.builder().currencyName("HUF").id(1).isDefault(true).build();
         language = Language.builder().languageName("hun").id(1).build();
         resources = Resources.builder().id(1).language(language).resourceKey("mybudget.resource").resourceName("resourcename").build();
+        monthlyPeriod = Resources.builder().id(1).language(language).resourceKey("mybudget.period.monthly").resourceName("havi").build();
+
 
         user =
                 User.builder()
@@ -71,7 +72,8 @@ public class CostServiceImplIT {
                     .created(LocalDateTime.now())
                     .id(userId)
                     .pwrd("batukan2")
-                    .username("batukan")
+                        .username("artistpm@gmail.com")
+                        .loginDate(LocalDateTime.now())
                     .build();
 
         managedUser = userService.create(userMapper.mapEntityToDto(user));
@@ -86,9 +88,9 @@ public class CostServiceImplIT {
                 .otherIdentifier("L1465993")
                 .payed(false)
                 .paymentDeadline(LocalDate.now())
-                .userId(managedUser.getUserId()).build();
+                                  .userId(managedUser.getId()).build();
 
-        costDtoCostService.create(costDto);
+        costService.create(costDto);
     }
 
     @Test
@@ -104,9 +106,9 @@ public class CostServiceImplIT {
                 .otherIdentifier("L1465993")
                 .payed(false)
                 .paymentDeadline(LocalDate.now())
-                .userId(managedUser.getUserId()).build();
+                                  .userId(managedUser.getId()).build();
 
-        CostDto response = costDtoCostService.create(costDto);
+        CostDto response = costService.create(costDto);
 
         assertEquals(response.getCostId().intValue(), 2);
         assertEquals(response.getCostName(), "LTP_payment");
@@ -114,10 +116,11 @@ public class CostServiceImplIT {
     }
 
     @Test
+    @Disabled
     public void deleteCostShouldBeOk() throws SQLException {
 
         CostDto costDto = CostDto.builder()
-                .costId(10)
+                                  .costId(110)
                 .costLabel(COST_LABEL)
                 .costName("LTP_payment")
                 .costValue(20150.0)
@@ -126,12 +129,13 @@ public class CostServiceImplIT {
                 .otherIdentifier("L1465993")
                 .payed(false)
                 .paymentDeadline(LocalDate.now())
-                .userId(managedUser.getUserId()).build();
+                                  .paymentPeriod(monthlyPeriod)
+                                  .userId(managedUser.getId()).build();
 
-        costDtoCostService.create(costDto);
+        costService.create(costDto);
 
-        costDtoCostService.delete("10");
-        List<CostDto> costDtos = costDtoCostService.listAllByUserId(managedUser.getUserId());
+        costService.delete("1100");
+        List<CostDto> costDtos = costService.listAllByUserId(managedUser.getId());
         costDtos.forEach(costDto1 -> {
                 assertNotEquals(costDto1.getUserId(),"10","Should not find cost in db!");
             });
@@ -140,7 +144,7 @@ public class CostServiceImplIT {
     @Test
     public void modifyCostShouldBeOk() {
 
-        List<CostDto> costDtos = costDtoCostService.listAllByUserId(managedUser.getUserId());
+        List<CostDto> costDtos = costService.listAllByUserId(managedUser.getId());
 
         CostDto createdCost = costDtos.get(0);
         createdCost.setCostLabel("Aegon önkéntes nyugdíj");
@@ -149,13 +153,13 @@ public class CostServiceImplIT {
         createdCost.setOtherIdentifier("AÖ0210-110");
 
 
-        CostDto response = costDtoCostService.modify(createdCost);
+        CostDto response = costService.modify(createdCost);
         assertEquals(response.getCostName(),"Aegon Önkéntes Nyugdíj Biztosítás", "Cost name should be equal!");
     }
 
     @Test
     public void listAllCostsByUserIdShouldBeOk() throws SQLException {
-        List<CostDto> costDtos = costDtoCostService.listAllByUserId(managedUser.getUserId());
+        List<CostDto> costDtos = costService.listAllByUserId(managedUser.getId());
         assertTrue(costDtos.size() > 0, "Should be greater then 0!");
     }
 
@@ -177,9 +181,9 @@ public class CostServiceImplIT {
                 .otherIdentifier("L1465993")
                 .payed(false)
                 .paymentDeadline(LocalDate.now())
-                .userId(managedUser.getUserId()).build();
+                                   .userId(managedUser.getId()).build();
 
-        costDtoCostService.create(fistCost);
+        costService.create(fistCost);
 
         CostDto firstCost = CostDto.builder()
                 .costId(id[1])
@@ -191,8 +195,8 @@ public class CostServiceImplIT {
                 .otherIdentifier("L1465996")
                 .payed(false)
                 .paymentDeadline(LocalDate.now())
-                .userId(managedUser.getUserId()).build();
+                                    .userId(managedUser.getId()).build();
 
-        costDtoCostService.create(firstCost);
+        costService.create(firstCost);
     }
 }

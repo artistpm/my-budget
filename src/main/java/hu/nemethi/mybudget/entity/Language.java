@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -23,6 +22,7 @@ public class Language {
 
     @NotBlank
     @Size(max = 100)
+    @Column(name = "name")
     private String languageName;
 
     @Column(name = "created", columnDefinition = "DATE default CURRENT_TIMESTAMP")

@@ -20,6 +20,7 @@ public class IncomeController {
     private IncomeServiceImpl incomeServiceImpl;
 
     public IncomeController(IncomeServiceImpl incomeServiceImpl) {
+        this.incomeServiceImpl = incomeServiceImpl;
     }
 
     @PostMapping("/save")

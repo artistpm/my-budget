@@ -14,7 +14,7 @@ public interface IncomeRepository extends JpaRepository<Income, Integer> {
     @Query("SELECT i FROM Income i WHERE i.id = ?1")
     List<Income> findAllIncomesByUserId(UUID userId);
 
-    @Query("DELETE FROM Income i WHERE i.userId = :userId")
+    @Query("DELETE FROM Income i WHERE i.user = :userId")
     void deleteAllByUserId(UUID userId);
 
 }

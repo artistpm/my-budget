@@ -1,6 +1,7 @@
 package hu.nemethi.mybudget.entity;
 
 import hu.nemethi.mybudget.enums.PlanType;
+import hu.nemethi.mybudget.interfaces.ParameterEncryption;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name="plan")
+@ParameterEncryption(name = "Plan")
 public class Plan {
 
     @Id

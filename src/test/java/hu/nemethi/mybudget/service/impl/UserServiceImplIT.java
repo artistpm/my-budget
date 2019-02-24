@@ -2,9 +2,9 @@ package hu.nemethi.mybudget.service.impl;
 
 import hu.nemethi.mybudget.dto.UserDto;
 import hu.nemethi.mybudget.enums.Authority;
-import hu.nemethi.mybudget.repository.UserRepositoryTest;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runners.MethodSorters;
@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest()
 public class UserServiceImplIT {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserRepositoryTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImplIT.class);
 
     @Autowired
     private UserServiceImpl userService;
@@ -46,11 +46,12 @@ public class UserServiceImplIT {
     }
 
     @Test
+    @Disabled
     void delete() {
         UserDto request = getUserDto();
         UserDto userDto = userService.create(request);
 
-        userService.delete(userDto.getUserId());
+        userService.delete(userDto.getId());
 
         UserDto found = userService.findByUserId(userDto);
 
@@ -82,11 +83,12 @@ public class UserServiceImplIT {
 
     private UserDto getUserDto() {
         return UserDto.builder()
-                .userId(UUID.randomUUID())
+                       .id(UUID.randomUUID())
                 .authority(Authority.ADMIN)
                 .created(now)
                 .pwrd("batukan")
                 .username("valaki@valaki.hu")
+                       .loginDate(LocalDateTime.now())
                 .build();
     }
 }

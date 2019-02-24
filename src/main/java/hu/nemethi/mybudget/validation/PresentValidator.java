@@ -6,7 +6,8 @@ import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-public class ConstraintValidator implements javax.validation.ConstraintValidator<Present, LocalDateTime> {
+
+public class PresentValidator implements javax.validation.ConstraintValidator<Present, LocalDateTime> {
 
 
     @Override

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService<UserDto> {
     }
 
     @Override
+    @Transactional
     public UserDto create(UserDto userDto) {
         User user = userMapper.mapDtoToEntity(userDto);
         return userMapper.mapEntityToDto(userRepository.save(user));
@@ -54,7 +56,7 @@ public class UserServiceImpl implements UserService<UserDto> {
 
     @Override
     public UserDto findByUserId(UserDto userDto) {
-        Optional<User> user = userRepository.findById(userDto.getUserId());
+        Optional<User> user = userRepository.findById(userDto.getId());
         return userMapper.mapEntityToDto(user.get());
 
     }

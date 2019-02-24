@@ -3,6 +3,8 @@ package hu.nemethi.mybudget.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import hu.nemethi.mybudget.entity.Currency;
 import hu.nemethi.mybudget.entity.Resources;
+import hu.nemethi.mybudget.interfaces.ParameterEncryptible;
+import hu.nemethi.mybudget.interfaces.ParameterEncryption;
 import lombok.*;
 
 import javax.validation.constraints.Digits;
@@ -18,7 +20,8 @@ import java.util.UUID;
 @Setter
 @Builder
 @EqualsAndHashCode(of = {"costName", "costValue"})
-public class CostDto {
+@ParameterEncryption(name = "Cost")
+public class CostDto implements ParameterEncryptible {
 
     @NotNull
     private Integer costId;

@@ -126,7 +126,7 @@
         </dependency>
 
 
-        <!-- Utilities -->
+        <!-- UTILITIES -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

@@ -2,12 +2,10 @@ package hu.nemethi.mybudget.service.impl;
 
 import hu.nemethi.mybudget.dto.UserDto;
 import hu.nemethi.mybudget.enums.Authority;
-import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,6 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @ActiveProfiles("test")
 @SpringBootTest()
 public class UserServiceImplIT {
